@@ -82,6 +82,3 @@ php artisan migrate --seed
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-
-
-This README file will help anyone who clones your project understand how to set it up and get started. If you have any specific features or instructions you'd like to include, feel free to modify it further!
