@@ -65,6 +65,7 @@ public function edit(Task $task)
 
 public function update(Request $request, Task $task)
 {
+    
     $request->validate([
         'name' => 'required|string|max:20',
         'description' => 'nullable|string',
@@ -72,14 +73,29 @@ public function update(Request $request, Task $task)
         'date_fin' => 'required|date|after_or_equal:date_debut',
     ]);
 
+    // Determine the status of the task
+    $currentDate = now();
+    $status = 'pending'; 
+
+    if ($request->date_fin < $currentDate) {
+        $status = 'missing'; 
+    } elseif ($request->date_debut > $currentDate) {
+        $status = 'pending'; 
+    } else {
+        $status = 'in-progress';
+    }
+
     $task->update([
         'name' => $request->name,
         'description' => $request->description,
         'date_debut' => $request->date_debut,
         'date_fin' => $request->date_fin,
+        'status' => $status,
     ]);
 
-    return redirect()->route(auth()->user()->role == 'admin' ? 'admin.dashboard' : 'user.dashboard')
+    // Get the user's role and construct the route name dynamically
+    $role = auth()->user()->role; // Get the user's role
+    return redirect()->route("{$role}.dashboard") // Use the role to build the route name
                      ->with('success', 'Task edited successfully.');
 }
 
