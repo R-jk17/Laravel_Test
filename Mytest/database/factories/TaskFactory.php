@@ -75,9 +75,9 @@ class TaskFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             // Generate a start date in the past
-            $date_debut = $this->faker->dateTimeBetween('-10 days', '-2 days');
+            $date_debut = $this->faker->dateTimeBetween('-10 days', 'now');
             // Ensure end date is after start date
-            $date_fin = $this->faker->dateTimeBetween($date_debut->format('Y-m-d H:i:s'), '+3 days');
+            $date_fin = $this->faker->dateTimeBetween($date_debut->format('Y-m-d H:i:s'), '+20 days');
 
             return [
                 'status' => 'in-progress',
