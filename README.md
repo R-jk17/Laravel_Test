@@ -75,9 +75,9 @@ The application will be available at `http://localhost:8000`.
 Run Seeders: To create an admin user and sample tasks for testing, run the seeders:
 
 ```bash
-Copier le code
 php artisan migrate --seed
 ```
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
